@@ -1,0 +1,44 @@
+import pandas as pd
+import numpy as np
+
+from formula_parser import parse_formula
+from attribution import shapley_attribution
+from utils import align_datasets
+from explanation import generate_explanation
+
+
+class KPIAttributionAgent:
+
+    def run(self, file_t1, file_t2, formula):
+
+        df1 = pd.read_excel(file_t1)
+        df2 = pd.read_excel(file_t2)
+
+        df1, df2 = align_datasets(df1, df2)
+
+        numeric_cols = df1.select_dtypes(include=np.number).columns.tolist()
+
+        kpi_fn, code = parse_formula(formula, numeric_cols)
+
+        kpi_t1 = kpi_fn(df1)
+        kpi_t2 = kpi_fn(df2)
+
+        change = kpi_t2 - kpi_t1
+
+        drivers = shapley_attribution(
+            kpi_fn,
+            df1,
+            df2,
+            numeric_cols
+        )
+
+        explanation = generate_explanation(change, drivers)
+
+        return {
+            "kpi_t1": kpi_t1,
+            "kpi_t2": kpi_t2,
+            "change": change,
+            "drivers": drivers,
+            "explanation": explanation,
+            "generated_code": code
+        }
