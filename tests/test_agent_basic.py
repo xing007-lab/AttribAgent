@@ -4,6 +4,7 @@ from agent import KPIAttributionAgent
 T1_FILE = "portfolio_t1.xlsx"
 T2_FILE = "portfolio_t2.xlsx"
 
+
 @pytest.mark.parametrize("formula", [
     "SUM(weight * return)",
 ])
@@ -24,3 +25,4 @@ def test_kpi_computation(formula):
 
     # Explanation contains "drivers"
     assert "drivers" in result["explanation"].lower()
+    
