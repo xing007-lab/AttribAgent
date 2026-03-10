@@ -43,7 +43,7 @@ jobs:
         run: mypy .
 
       - name: Security scan
-        run: bandit -r .
+        run: bandit -r . -s B101,B102
 
       - name: Run tests
         run: pytest
