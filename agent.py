@@ -9,7 +9,7 @@ from explanation import generate_explanation
 
 class KPIAttributionAgent:
 
-    def run(self, file_t1, file_t2, formula):
+    def run(self, file_t1, file_t2, formula, online_mode=True):
 
         df1 = pd.read_excel(file_t1)
         df2 = pd.read_excel(file_t2)
@@ -32,7 +32,10 @@ class KPIAttributionAgent:
             numeric_cols
         )
 
-        explanation = generate_explanation(change, drivers)
+        if online_mode:
+            explanation = generate_explanation(change, drivers)
+        else:
+            explanation = None
 
         return {
             "kpi_t1": kpi_t1,
