@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from agent_offline import SelfBuildingKPIOfflineAgent
+from agent import KPIAttributionAgent
 
 def test_empty_dataset(tmp_path):
     # Create empty datasets
@@ -10,7 +10,7 @@ def test_empty_dataset(tmp_path):
     df_empty.to_excel(t1, index=False)
     df_empty.to_excel(t2, index=False)
 
-    agent = SelfBuildingKPIOfflineAgent()
+    agent = KPIAttributionAgent()
     formula = "SUM(weight * return)"
 
     result = agent.run(t1, t2, formula)
@@ -28,7 +28,7 @@ def test_missing_columns(tmp_path):
     df_t1.to_excel(t1, index=False)
     df_t2.to_excel(t2, index=False)
 
-    agent = SelfBuildingKPIOfflineAgent()
+    agent = KPIAttributionAgent()
     formula = "SUM(weight * return)"
     
     with pytest.raises(KeyError):

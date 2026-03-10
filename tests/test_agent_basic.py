@@ -1,5 +1,5 @@
 import pytest
-from agent_offline import SelfBuildingKPIOfflineAgent
+from agent import KPIAttributionAgent
 
 T1_FILE = "portfolio_t1.xlsx"
 T2_FILE = "portfolio_t2.xlsx"
@@ -8,7 +8,7 @@ T2_FILE = "portfolio_t2.xlsx"
     "SUM(weight * return)",
 ])
 def test_kpi_computation(formula):
-    agent = SelfBuildingKPIOfflineAgent()
+    agent = KPIAttributionAgent()
     result = agent.run(T1_FILE, T2_FILE, formula)
 
     # KPI values are numeric
