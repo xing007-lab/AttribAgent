@@ -1,36 +1,56 @@
+# app.py
+import os
 import streamlit as st
+import pandas as pd
 from agent import KPIAttributionAgent
 
-st.title("Universal KPI Attribution Agent")
+# ----------------------------
+# OpenAI key handling
+# ----------------------------
+api_key = st.secrets.get("OPENAI_API_KEY", os.environ.get("OPENAI_API_KEY"))
 
-file1 = st.file_uploader("Upload T1 dataset")
-file2 = st.file_uploader("Upload T2 dataset")
+if api_key:
+    import openai
+    openai.api_key = api_key
+    ONLINE_MODE = True
+else:
+    ONLINE_MODE = False
+    st.info("⚠️ OpenAI key not found. Running in offline mode.")
 
-formula = st.text_input(
-    "KPI Formula",
-    "SUM(weight * return)"
-)
+# ----------------------------
+# Streamlit UI
+# ----------------------------
+st.title("Self-Building KPI Attribution Agent")
+
+# Upload Excel files
+t1_file = st.file_uploader("Upload T1 Excel file", type=["xlsx"])
+t2_file = st.file_uploader("Upload T2 Excel file", type=["xlsx"])
+
+formula = st.text_input("Enter KPI formula (e.g., SUM(weight * return))", "")
 
 if st.button("Run Attribution"):
+    if not t1_file or not t2_file or not formula:
+        st.error("Please upload both Excel files and enter a formula.")
+    else:
+        # Read Excel files
+        df_t1 = pd.read_excel(t1_file)
+        df_t2 = pd.read_excel(t2_file)
 
-    agent = KPIAttributionAgent()
+        # Run agent
+        agent = KPIAttributionAgent()
 
-    result = agent.run(file1, file2, formula)
+        try:
+            result = agent.run(df_t1, df_t2, formula, online_mode=ONLINE_MODE)
+        except Exception as e:
+            st.error(f"Error: {e}")
+        else:
+            st.subheader("KPI Results")
+            st.write(f"KPI T1: {result['kpi_t1']}")
+            st.write(f"KPI T2: {result['kpi_t2']}")
+            st.write(f"Change: {result['change']}")
 
-    st.subheader("KPI Results")
+            st.subheader("Driver Contributions")
+            st.write(result["drivers"])
 
-    st.write("T1:", result["kpi_t1"])
-    st.write("T2:", result["kpi_t2"])
-    st.write("Change:", result["change"])
-
-    st.subheader("Drivers")
-
-    st.write(result["drivers"])
-
-    st.subheader("Explanation")
-
-    st.write(result["explanation"])
-
-    st.subheader("Generated KPI Code")
-
-    st.code(result["generated_code"])
+            st.subheader("Explanation")
+            st.code(result["explanation"])
