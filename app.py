@@ -6,7 +6,6 @@ import streamlit as st
 
 from agent.agentclient import KPIAttributionAgent
 
-
 # ----------------------------
 # OpenAI key handling
 # ----------------------------
