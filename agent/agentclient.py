@@ -6,7 +6,8 @@ from .formula_parser import parse_formula
 from explanation import generate_explanation
 from utils import align_datasets
 
-class KPIAttributionAgent:  
+
+class KPIAttributionAgent:
     def run(self, file_t1, file_t2, formula, online_mode=False):
 
         df1 = pd.read_excel(file_t1)
