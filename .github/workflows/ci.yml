@@ -46,7 +46,7 @@ jobs:
         run: bandit -r . -s B101,B102
 
       - name: Run tests
-        run: pytest
+        run: pytest tests/
 
       - name: Run tests with coverage
         run: pytest --cov=agent tests/
