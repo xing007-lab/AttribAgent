@@ -1,10 +1,10 @@
-from agent import KPIAttributionAgent
+from agent.agent import KPIAttributionAgent
 
 T1_FILE = "portfolio_t1.xlsx"
 T2_FILE = "portfolio_t2.xlsx"
 
 
-def test_shapley_sum_equals_change():
+def test_shapley_sum_equals_change():agent.agent
     agent = KPIAttributionAgent()
     formula = "SUM(weight * return)"
     result = agent.run(T1_FILE, T2_FILE, formula)

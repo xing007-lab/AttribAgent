@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from agent import KPIAttributionAgent
+from agent.agentagent.agent import KPIAttributionAgent
 
 
 def test_empty_dataset(tmp_path):
