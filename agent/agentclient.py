@@ -30,6 +30,7 @@ class KPIAttributionAgent:
             explanation = generate_explanation(change, drivers)
         else:
             explanation = "N/A"
+
         return {
                 "kpi_t1": kpi_t1,
                 "kpi_t2": kpi_t2,
@@ -37,4 +38,4 @@ class KPIAttributionAgent:
                 "drivers": drivers,
                 "explanation": explanation,
                 "generated_code": code,
-            }
+                }
