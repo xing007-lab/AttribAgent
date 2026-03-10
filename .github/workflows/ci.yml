@@ -61,5 +61,6 @@ jobs:
           git tag $TAG
           git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/xing007-lab/AttribAgent.git $TAG
           echo "::set-output name=TAG::$TAG"
+
 env:
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
