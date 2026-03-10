@@ -32,6 +32,6 @@ def test_missing_columns(tmp_path):
 
     agent = KPIAttributionAgent()
     formula = "SUM(weight * return)"
-    
+
     with pytest.raises(KeyError):
         agent.run(t1, t2, formula)

@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def align_datasets(df1, df2, key="security"):
 
     merged = pd.merge(

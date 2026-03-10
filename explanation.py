@@ -2,6 +2,7 @@ from openai import OpenAI
 
 client = OpenAI()
 
+
 def generate_explanation(change, drivers):
 
     prompt = f"""
