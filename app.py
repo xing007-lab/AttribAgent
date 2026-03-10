@@ -42,7 +42,9 @@ if st.button("Run Attribution"):
 
         # Run agent
         try:
-            result = KPIAttributionAgent().run(df_t1, df_t2, formula, online_mode=ONLINE_MODE)
+            result = KPIAttributionAgent().run(
+                df_t1, df_t2, formula, online_mode=ONLINE_MODE
+            )
         except Exception as e:
             st.error(f"Error: {e}")
         else:

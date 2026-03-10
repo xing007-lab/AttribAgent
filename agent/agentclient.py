@@ -32,10 +32,10 @@ class KPIAttributionAgent:
             explanation = "N/A"
 
         return {
-                "kpi_t1": kpi_t1,
-                "kpi_t2": kpi_t2,
-                "change": change,
-                "drivers": drivers,
-                "explanation": explanation,
-                "generated_code": code,
-                }
+            "kpi_t1": kpi_t1,
+            "kpi_t2": kpi_t2,
+            "change": change,
+            "drivers": drivers,
+            "explanation": explanation,
+            "generated_code": code,
+        }
