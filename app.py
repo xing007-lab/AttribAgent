@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import streamlit as st
 
-from agent import KPIAttributionAgent
+from agent.agent import KPIAttributionAgent
 
 # ----------------------------
 # OpenAI key handling
