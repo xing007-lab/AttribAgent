@@ -1,5 +1,3 @@
-import sympy as sp
-
 def parse_formula(formula, columns):
 
     expr = formula

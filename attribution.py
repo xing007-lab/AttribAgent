@@ -1,6 +1,6 @@
-import numpy as np
 import itertools
 import math
+
 
 def shapley_attribution(kpi_fn, df1, df2, variables):
 
