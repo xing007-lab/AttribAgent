@@ -25,4 +25,3 @@ def test_kpi_computation(formula):
 
     # Explanation contains "drivers"
     assert "drivers" in result["explanation"].lower()
-    

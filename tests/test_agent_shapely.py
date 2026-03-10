@@ -1,8 +1,8 @@
-import pytest
 from agent import KPIAttributionAgent
 
 T1_FILE = "portfolio_t1.xlsx"
 T2_FILE = "portfolio_t2.xlsx"
+
 
 def test_shapley_sum_equals_change():
     agent = KPIAttributionAgent()

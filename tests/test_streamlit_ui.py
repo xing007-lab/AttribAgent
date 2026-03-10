@@ -1,8 +1,7 @@
+from io import BytesIO
 import streamlit as st
-from streamlit.runtime.scriptrunner import add_script_run_ctx
 import pytest
 import pandas as pd
-from io import BytesIO
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -13,6 +12,7 @@ import app  # your Streamlit app filename (app.py)
 T1_FILE = "portfolio_t1.xlsx"
 T2_FILE = "portfolio_t2.xlsx"
 
+
 def create_filelike_from_excel(path):
     """Helper: read Excel and return BytesIO object for Streamlit upload simulation"""
     df = pd.read_excel(path)
@@ -20,6 +20,7 @@ def create_filelike_from_excel(path):
     df.to_excel(buffer, index=False)
     buffer.seek(0)
     return buffer
+
 
 @pytest.mark.parametrize("formula", ["SUM(weight * return)"])
 def test_streamlit_ui_runs(formula, monkeypatch):

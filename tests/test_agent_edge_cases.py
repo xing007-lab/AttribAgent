@@ -2,6 +2,7 @@ import pytest
 import pandas as pd
 from agent import KPIAttributionAgent
 
+
 def test_empty_dataset(tmp_path):
     # Create empty datasets
     df_empty = pd.DataFrame(columns=["weight", "return"])
@@ -18,6 +19,7 @@ def test_empty_dataset(tmp_path):
     assert result["kpi_t2"] == 0
     assert result["change"] == 0
     assert result["drivers"] == {}
+
 
 def test_missing_columns(tmp_path):
     # Dataset missing 'return' column
