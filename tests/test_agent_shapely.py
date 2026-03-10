@@ -1,4 +1,3 @@
-from sympy import false
 from agent.agentclient import KPIAttributionAgent
 
 T1_FILE = "./tests/data/portfolio_t1.xlsx"
