@@ -1,13 +1,13 @@
-from agent.agent import KPIAttributionAgent
+from sympy import false
+from agent.agentclient import KPIAttributionAgent
 
-T1_FILE = "portfolio_t1.xlsx"
-T2_FILE = "portfolio_t2.xlsx"
+T1_FILE = "./tests/data/portfolio_t1.xlsx"
+T2_FILE = "./tests/data/portfolio_t2.xlsx"
 
 
 def test_shapley_sum_equals_change():
-    agent = KPIAttributionAgent()
     formula = "SUM(weight * return)"
-    result = agent.run(T1_FILE, T2_FILE, formula)
+    result = KPIAttributionAgent().run(T1_FILE, T2_FILE, formula)
 
     total_contrib = sum(result["drivers"].values())
     # Shapley contributions should sum to total KPI change

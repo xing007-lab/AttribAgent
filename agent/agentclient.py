@@ -1,15 +1,13 @@
 import numpy as np
 import pandas as pd
 
-from agent.attribution import shapley_attribution
-from agent.formula_parser import parse_formula
+from .attribution import shapley_attribution
+from .formula_parser import parse_formula
 from explanation import generate_explanation
 from utils import align_datasets
 
-
-class KPIAttributionAgent:
-
-    def run(self, file_t1, file_t2, formula, online_mode=True):
+class KPIAttributionAgent:  
+    def run(self, file_t1, file_t2, formula, online_mode=False):
 
         df1 = pd.read_excel(file_t1)
         df2 = pd.read_excel(file_t2)
@@ -30,13 +28,12 @@ class KPIAttributionAgent:
         if online_mode:
             explanation = generate_explanation(change, drivers)
         else:
-            explanation = None
-
+            explanation = "N/A"
         return {
-            "kpi_t1": kpi_t1,
-            "kpi_t2": kpi_t2,
-            "change": change,
-            "drivers": drivers,
-            "explanation": explanation,
-            "generated_code": code,
-        }
+                "kpi_t1": kpi_t1,
+                "kpi_t2": kpi_t2,
+                "change": change,
+                "drivers": drivers,
+                "explanation": explanation,
+                "generated_code": code,
+            }

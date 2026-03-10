@@ -4,12 +4,13 @@ import os
 import pandas as pd
 import streamlit as st
 
-from agent.agent import KPIAttributionAgent
+from agent.agentclient import KPIAttributionAgent
+
 
 # ----------------------------
 # OpenAI key handling
 # ----------------------------
-api_key = st.secrets.get("OPENAI_API_KEY", os.environ.get("OPENAI_API_KEY"))
+api_key = os.environ.get("OPENAI_API_KEY")
 
 if api_key:
     import openai
@@ -40,10 +41,8 @@ if st.button("Run Attribution"):
         df_t2 = pd.read_excel(t2_file)
 
         # Run agent
-        agent = KPIAttributionAgent()
-
         try:
-            result = agent.run(df_t1, df_t2, formula, online_mode=ONLINE_MODE)
+            result = KPIAttributionAgent().run(df_t1, df_t2, formula, online_mode=ONLINE_MODE)
         except Exception as e:
             st.error(f"Error: {e}")
         else:
