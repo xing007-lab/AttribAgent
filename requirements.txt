@@ -6,5 +6,6 @@ shap
 openai
 altair==4.2.2
 streamlit>=1.24
-pytest
 flake8
+black
+pytest
