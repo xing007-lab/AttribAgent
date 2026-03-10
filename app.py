@@ -11,6 +11,7 @@ api_key = st.secrets.get("OPENAI_API_KEY", os.environ.get("OPENAI_API_KEY"))
 
 if api_key:
     import openai
+
     openai.api_key = api_key
     ONLINE_MODE = True
 else:

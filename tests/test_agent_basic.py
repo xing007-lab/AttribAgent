@@ -5,9 +5,12 @@ T1_FILE = "portfolio_t1.xlsx"
 T2_FILE = "portfolio_t2.xlsx"
 
 
-@pytest.mark.parametrize("formula", [
-    "SUM(weight * return)",
-])
+@pytest.mark.parametrize(
+    "formula",
+    [
+        "SUM(weight * return)",
+    ],
+)
 def test_kpi_computation(formula):
     agent = KPIAttributionAgent()
     result = agent.run(T1_FILE, T2_FILE, formula)

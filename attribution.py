@@ -11,7 +11,7 @@ def shapley_attribution(kpi_fn, df1, df2, variables):
 
         others = [v for v in variables if v != var]
 
-        for r in range(len(others)+1):
+        for r in range(len(others) + 1):
 
             for subset in itertools.combinations(others, r):
 
@@ -28,9 +28,9 @@ def shapley_attribution(kpi_fn, df1, df2, variables):
                 kpi_after = kpi_fn(with_var)
 
                 weight = (
-                    math.factorial(len(subset)) *
-                    math.factorial(n-len(subset)-1) /
-                    math.factorial(n)
+                    math.factorial(len(subset))
+                    * math.factorial(n - len(subset) - 1)
+                    / math.factorial(n)
                 )
 
                 contributions[var] += weight * (kpi_after - kpi_before)

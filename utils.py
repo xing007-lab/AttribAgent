@@ -3,13 +3,7 @@ import pandas as pd
 
 def align_datasets(df1, df2, key="security"):
 
-    merged = pd.merge(
-        df1,
-        df2,
-        on=key,
-        how="outer",
-        suffixes=("_t1", "_t2")
-    )
+    merged = pd.merge(df1, df2, on=key, how="outer", suffixes=("_t1", "_t2"))
 
     merged = merged.fillna(0)
 

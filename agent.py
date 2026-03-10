@@ -25,12 +25,7 @@ class KPIAttributionAgent:
 
         change = kpi_t2 - kpi_t1
 
-        drivers = shapley_attribution(
-            kpi_fn,
-            df1,
-            df2,
-            numeric_cols
-        )
+        drivers = shapley_attribution(kpi_fn, df1, df2, numeric_cols)
 
         if online_mode:
             explanation = generate_explanation(change, drivers)
@@ -43,5 +38,5 @@ class KPIAttributionAgent:
             "change": change,
             "drivers": drivers,
             "explanation": explanation,
-            "generated_code": code
+            "generated_code": code,
         }
