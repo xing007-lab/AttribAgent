@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-from attribution import shapley_attribution
-from formula_parser import parse_formula
+from agent.attribution import shapley_attribution
+from agent.formula_parser import parse_formula
 
 from explanation import generate_explanation
 from utils import align_datasets
