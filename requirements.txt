@@ -5,3 +5,4 @@ sympy
 shap
 streamlit
 openai
+altair==4.2.2
