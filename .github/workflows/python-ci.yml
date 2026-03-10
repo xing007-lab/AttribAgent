@@ -1,13 +1,13 @@
-name: Python CI/CD
+name: Python CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,45 +15,24 @@ jobs:
         python-version: [3.11]
 
     steps:
-      # 1️⃣ Checkout repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # 2️⃣ Set up Python
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest openpyxl streamlit flake8 agent_offline
+          pip install pytest flake8
 
-      # 4️⃣ Run unit tests (agent offline)
-      - name: Run unit tests
+      - name: Run tests
         run: |
-          pytest tests/test_agent_basic.py
-          pytest tests/test_agent_edge_cases.py
-          pytest tests/test_agent_shapley.py
+          pytest tests/
 
-      # 5️⃣ Run Streamlit UI tests (headless)
-      - name: Run Streamlit UI tests
-        run: |
-          pytest tests/test_streamlit_ui.py
-
-      # 6️⃣ Lint code
       - name: Lint code
         run: |
           flake8 . --max-line-length=120
-      
-      # 7️⃣ Deploy Streamlit app (Community Cloud)
-      - name: Deploy Streamlit app
-        uses: streamlit/action@v1
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
-          buildCommand: "pip install -r requirements.txt"
-          runCommand: "streamlit run app.py"
