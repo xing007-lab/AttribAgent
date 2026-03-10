@@ -31,7 +31,9 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests/
+          pytest tests/test_agent_basic.py
+          pytest tests/test_agent_edge_cases.py
+          pytest tests/test_agent_shapely.py
 
       - name: Lint code
         run: |
