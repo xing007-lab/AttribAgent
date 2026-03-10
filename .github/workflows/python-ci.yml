@@ -1,4 +1,4 @@
-name: Python CI
+name: Python CI/CD
 
 on:
   push:
@@ -12,28 +12,39 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.10, 3.11]
+        python-version: [3.11]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
+      # 2️⃣ Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pytest openpyxl streamlit
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest openpyxl streamlit flake8
 
-    - name: Run unit tests
-      run: |
-        pytest tests/
+      # 4️⃣ Run unit tests (agent offline)
+      - name: Run unit tests
+        run: |
+          pytest tests/test_agent_basic.py
+          pytest tests/test_agent_edge_cases.py
+          pytest tests/test_agent_shapley.py
 
-    - name: Lint code
-      run: |
-        pip install flake8
-        flake8 .
+      # 5️⃣ Run Streamlit UI tests (headless)
+      - name: Run Streamlit UI tests
+        run: |
+          pytest tests/test_streamlit_ui.py
+
+      # 6️⃣ Lint code
+      - name: Lint code
+        run: |
+          flake8 . --max-line-length=120
