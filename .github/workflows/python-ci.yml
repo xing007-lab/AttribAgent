@@ -48,3 +48,12 @@ jobs:
       - name: Lint code
         run: |
           flake8 . --max-line-length=120
+      
+      # 7️⃣ Deploy Streamlit app (Community Cloud)
+      - name: Deploy Streamlit app
+        uses: streamlit/action@v1
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          buildCommand: "pip install -r requirements.txt"
+          runCommand: "streamlit run app.py"
