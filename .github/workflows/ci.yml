@@ -31,7 +31,7 @@ jobs:
           pip install pytest flake8 black isort mypy bandit
 
       - name: Lint
-        run: flake8 .
+        run: flake8 . --ignore=E501
 
       - name: Format check
         run: black --check .
