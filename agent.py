@@ -1,10 +1,10 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-from formula_parser import parse_formula
 from attribution import shapley_attribution
-from utils import align_datasets
 from explanation import generate_explanation
+from formula_parser import parse_formula
+from utils import align_datasets
 
 
 class KPIAttributionAgent:

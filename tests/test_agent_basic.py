@@ -1,4 +1,5 @@
 import pytest
+
 from agent import KPIAttributionAgent
 
 T1_FILE = "portfolio_t1.xlsx"

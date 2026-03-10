@@ -7,5 +7,6 @@ openai
 altair==4.2.2
 streamlit>=1.24
 flake8
+isort
 black
 pytest
